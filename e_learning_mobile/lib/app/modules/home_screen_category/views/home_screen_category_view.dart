@@ -259,7 +259,7 @@ class HomeScreenCategoryView extends GetView<HomeScreenCategoryController> {
                           },
                         ),
                       )
-                    : const Icon(Icons.image, size: 40, color: Colors.grey),
+                    : const Icon(Icons.image, size: 60, color: Colors.grey),
               ),
               const SizedBox(height: 16),
               Expanded(
