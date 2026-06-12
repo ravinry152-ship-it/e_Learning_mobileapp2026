@@ -146,13 +146,6 @@ class LibraryOnlineView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  Text(
-                    "សៀវភៅទាំងអស់",
-                    style: GoogleFonts.kantumruyPro(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -168,10 +161,16 @@ class LibraryOnlineView extends StatelessWidget {
               }
               if(con.booksList.isEmpty){
                 return Center(
-                child: Text(
-                "មិនមានសៀវភៅក្នុងប្រភេទនេះទេ",
-                 style: GoogleFonts.kantumruyPro(color: Colors.grey),
-              ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 150),
+                  child: Text(
+                  "មិនមានសៀវភៅក្នុងប្រភេទនេះទេ",
+                   style: GoogleFonts.kantumruyPro(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold
+                    ),
+                                ),
+                ),
               );
               }
               return GridView.builder(
