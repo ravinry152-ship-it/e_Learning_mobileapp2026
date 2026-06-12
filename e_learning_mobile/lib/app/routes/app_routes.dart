@@ -15,6 +15,7 @@ abstract class Routes {
   static const LIBRARY_ONLINE = _Paths.LIBRARY_ONLINE;
   static const PROFILE = _Paths.PROFILE;
   static const NOTIFICATION = _Paths.NOTIFICATION;
+  static const VIEW_BOOK = _Paths.VIEW_BOOK;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const LIBRARY_ONLINE = '/library-online';
   static const PROFILE = '/profile';
   static const NOTIFICATION = '/notification';
+  static const VIEW_BOOK = '/view-book';
 }
