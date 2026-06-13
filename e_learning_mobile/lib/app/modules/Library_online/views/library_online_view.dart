@@ -151,97 +151,6 @@ class LibraryOnlineView extends StatelessWidget {
               // ឆែកមើល List សៀវភៅដែលបានមកពីការ Filter ឬ Search 
               if (con.booksList.isEmpty) {
                 return Center(
-<<<<<<< HEAD
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 150),
-                  child: Text(
-                  "មិនមានសៀវភៅក្នុងប្រភេទនេះទេ",
-                   style: GoogleFonts.kantumruyPro(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold
-                    ),
-                     ),
-                ),
-              );
-              }
-              return GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
-              gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 14,
-                crossAxisSpacing: 14,
-                childAspectRatio: 0.90
-                ) , 
-              itemCount: con.booksList.length,
-              itemBuilder: (context, index){
-                final item=con.booksList[index];
-                return Container(
-              decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
-          boxShadow: [
-            BoxShadow(
-              // ignore: deprecated_member_use
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 6,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-         child: Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-          color: Color(0xFFF8FAFC),
-           borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-          ),
-            child: item.image != null && item.image!.isNotEmpty
-             ? ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-            child: Image.network(
-              item.image!,
-              fit: BoxFit.cover,
-              // បង្ហាញវង់មូល Loading រង់ចាំរូបភាពមកដល់
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return const Center(
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                );
-              },
-              errorBuilder: (context, error, stackTrace) {
-                return const Center(
-                  child: Icon(Icons.broken_image, size: 40, color: Colors.grey),
-                );
-              },
-            ),
-          )
-          : const Center(
-            child: Icon(Icons.book, size: 50, color: Color(0xFF0E2CB1)),
-          ),
-           ),
-            ),
-            
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // ចំណងជើងសៀវភៅ
-                  Text(
-                    item.title ?? "គ្មានចំណងជើង",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis, 
-                    style: GoogleFonts.kantumruyPro(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: const Color(0xFF1E293B),
-=======
                   child: Padding(
                     padding: const EdgeInsets.only(top: 150),
                     child: Text(
@@ -250,7 +159,6 @@ class LibraryOnlineView extends StatelessWidget {
                         color: Colors.grey,
                         fontWeight: FontWeight.bold,
                       ),
->>>>>>> test
                     ),
                   ),
                 );
