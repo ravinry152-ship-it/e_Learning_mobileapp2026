@@ -8,12 +8,12 @@ class LibraryOnlineController extends GetxController {
   final ApiProvider api = Get.find<ApiProvider>();
   RxList<Books> booksList = <Books>[].obs;
   var searchbook =<Books>[].obs;
-  // បង្កើត Map ដើម្បីភ្ជាប់ឈ្មោះខ្មែរ ទៅនឹង ID ពិតប្រាកដនៅក្នុង Django Database
+  // បង្កើត Map ដើម្បីភ្ជាប់ ទៅនឹង ID ពិតប្រាកដនៅក្នុង Django Database
   final List<Map<String, dynamic>> filterChips = [
     {'name': 'ទាំងអស់', 'id': null},       
     {'name': 'បច្ចេកវិទ្យា', 'id': 1},    
     {'name': 'កសិកម្ម', 'id': 2},       
-    {'name': 'ចំណេះដឹងទូទៅ', 'id': 3},   
+    {'name': 'ចំណេះដឹងទូទៅ', 'id': 4},   
   ];
 
   final RxInt selectedFilterIndex = 0.obs;

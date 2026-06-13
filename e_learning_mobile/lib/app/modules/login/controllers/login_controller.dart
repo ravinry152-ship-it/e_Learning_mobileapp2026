@@ -97,12 +97,12 @@ class LoginController extends GetxController {
   void _showSuccessSnackbar() {
     Get.snackbar(
       '', '',
-      backgroundColor: const Color.fromARGB(255, 92, 169, 96),
-      colorText: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 213, 235, 214),
+      colorText: const Color.fromARGB(255, 32, 29, 29),
       snackPosition: SnackPosition.TOP,
       duration: const Duration(seconds: 3),
-      titleText: Text('ចូលប្រើប្រាស់ជោគជ័យ', style: GoogleFonts.kantumruyPro(color: Colors.white, fontWeight: FontWeight.bold)),
-      messageText: Text('សូមស្វាគមន៍មកកាន់កម្មវិធីចំណេះថ្មីៗ', style: GoogleFonts.kantumruyPro(color: Colors.white)),
+      titleText: Text('ចូលប្រើប្រាស់ជោគជ័យ', style: GoogleFonts.kantumruyPro(color: const Color.fromARGB(255, 46, 43, 43), fontWeight: FontWeight.bold)),
+      messageText: Text('សូមស្វាគមន៍មកកាន់កម្មវិធីចំណេះថ្មីៗ', style: GoogleFonts.kantumruyPro(color: const Color.fromARGB(255, 55, 51, 51))),
     );
   }
 
