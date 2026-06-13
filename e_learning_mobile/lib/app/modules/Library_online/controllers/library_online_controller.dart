@@ -7,7 +7,7 @@ import 'package:get/get.dart' hide Response;
 class LibraryOnlineController extends GetxController {
   final ApiProvider api = Get.find<ApiProvider>();
   RxList<Books> booksList = <Books>[].obs;
-
+  var searchbook =<Books>[].obs;
   // បង្កើត Map ដើម្បីភ្ជាប់ឈ្មោះខ្មែរ ទៅនឹង ID ពិតប្រាកដនៅក្នុង Django Database
   final List<Map<String, dynamic>> filterChips = [
     {'name': 'ទាំងអស់', 'id': null},       
@@ -48,6 +48,7 @@ class LibraryOnlineController extends GetxController {
           final List<dynamic> data = response.data;
           // ដោយសារ /book/ ធម្មតាផ្ញើមកជា List នៃសៀវភៅត្រង់ៗ យើងបំប្លែងយកតែម្តង
           booksList.assignAll(data.map((json) => Books.fromJson(json)).toList());
+          searchbook.assignAll(booksList);
         }
       } else {
         // កាលណាចុចប្រភេទជាក់លាក់៖ ហៅទៅកាន់ URL មាន ID ដូចជា /book/1/
@@ -68,6 +69,21 @@ class LibraryOnlineController extends GetxController {
       booksList.clear();
     } finally {
       isLoading.value = false;
+    }
+  }
+  //=================================searchbook===================================
+  void searchBook(String query) {
+    if (query.isEmpty) {
+      searchbook.assignAll(booksList);
+    } else {
+      final searchInput = query.toLowerCase();
+      final results = booksList.where((book) {
+        final title = (book.title ?? '').toLowerCase();
+        final description = (book.title ?? '').toLowerCase();
+        return title.contains(searchInput) || description.contains(searchInput);
+      }).toList();
+
+      searchbook.assignAll(results);
     }
   }
 }
