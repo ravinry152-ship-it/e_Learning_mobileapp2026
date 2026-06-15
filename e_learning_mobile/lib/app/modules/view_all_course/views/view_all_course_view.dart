@@ -1,5 +1,4 @@
 // ignore_for_file: non_constant_identifier_names, deprecated_member_use
-import 'package:e_learning_mobile/app/modules/home_screen_category/controllers/home_screen_category_controller.dart';
 import 'package:e_learning_mobile/app/modules/model/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,10 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/view_all_course_controller.dart';
 
 class ViewAllCourseView extends GetView<ViewAllCourseController> {
-   ViewAllCourseView({super.key});
-// Register or retrieve the controller instance. Use Get.put to return the instance
-final c = Get.put(ViewAllCourseController());
-final con = Get.find<HomeScreenCategoryController>();
+  ViewAllCourseView({super.key});
+  final c = Get.put(ViewAllCourseController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,111 +19,95 @@ final con = Get.find<HomeScreenCategoryController>();
         centerTitle: true,
         titleSpacing: 0,
         title: Text(
-          "មេីលវគ្គសិក្សាទាំងអស់", 
+          "មើលវគ្គសិក្សាទាំងអស់",
           style: GoogleFonts.kantumruyPro(
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
-      body: Obx(() {
-        if (con.currentIndex.value == 0) {
-          return RefreshIndicator(
-            onRefresh: () async => con.fetchCourse(),
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'ប្រភេទវគ្គសិក្សា',
-                        style: GoogleFonts.kantumruyPro(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  _FilterChipsRow(controller: c),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  ),
-                  SizedBox(height: 20,),
-                  _buildcourselist()
-                ],
+      body: RefreshIndicator(
+        onRefresh: () async => c.fetchcourse(),
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(), 
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 8),
+              Text(
+                'ប្រភេទវគ្គសិក្សា',
+                style: GoogleFonts.kantumruyPro(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          );
-        }
-        return const SizedBox.shrink();
-      }),
+              const SizedBox(height: 16),
+              _FilterChipsRow(controller: c),
+              const SizedBox(height: 24),
+              _buildcourselist(),
+            ],
+          ),
+        ),
+      ),
     );
   }
-  //==================widet course list=======================
-  Widget  _buildcourselist(){
-    return Obx((){
-      if(con.isLoading.value){
-        return Padding(
-          padding:EdgeInsets.all(20),
+
+  //================== widget course list =======================
+  Widget _buildcourselist() {
+    return Obx(() {
+      if (c.isLoading.value) {
+        return const Padding(
+          padding: EdgeInsets.all(40),
           child: Center(child: CircularProgressIndicator()),
-           );
+        );
       }
-      if(con.product.isEmpty){
+
+      if (c.course.isEmpty) {
         return Padding(
-           padding: EdgeInsets.only(top: 50, left: 40),
-           child: Center(child: Text("មិនមានទិន្នន័យអំពីវក្គសិក្សា")),
-           );
-      }
-       final Data currentData = con.product[0];
-      final List<FullCourses> courseList = currentData.fullCourses ?? [];
-      if(courseList.isEmpty){
-        return Padding(
-           padding: EdgeInsets.only(top: 200, left: 120),
-          child: Text(
-            "មិនមានទិន្នន័យអំពីវក្គសិក្សា",
-            style: GoogleFonts.kantumruyPro(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 15
+          padding: const EdgeInsets.only(top: 100),
+          child: Center(
+            child: Text(
+              "មិនមានទិន្នន័យអំពីវគ្គសិក្សាទេ",
+              style: GoogleFonts.kantumruyPro(
+                color: Colors.grey,
+                fontSize: 16,
+              ),
             ),
           ),
-           );
+        );
       }
+
       return GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount:2,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 0.90
-           ),
-         itemCount: courseList.length, 
-        itemBuilder: (context, index){
-        final FullCourses course = courseList[index]; 
-        return _Course(course);
-        }
-        );
+          childAspectRatio: 0.85, 
+        ),
+        itemCount: c.course.length,
+        itemBuilder: (context, index) {
+          final FullCourses courseItem = c.course[index];
+          return _Course(courseItem);
+        },
+      );
     });
   }
-  //=====================widget course=========================
- Widget _Course(FullCourses product) {
+
+  //===================== widget course item =========================
+  Widget _Course(FullCourses product) {
     String imageUrl = "";
-    
+
     if (product.image != null && product.image!.isNotEmpty) {
       if (product.image!.startsWith('http')) {
         imageUrl = product.image!;
       } else {
-        String cleanPath = product.image!.startsWith('/') 
-            ? product.image!.substring(1) 
-            : product.image!;     
+        String cleanPath = product.image!.startsWith('/')
+            ? product.image!.substring(1)
+            : product.image!;
         if (cleanPath.startsWith('media/')) {
           imageUrl = "http://10.0.2.2:8000/$cleanPath";
         } else {
@@ -139,7 +121,7 @@ final con = Get.find<HomeScreenCategoryController>();
         Get.toNamed('/view-course-detail', arguments: product.id);
       },
       child: Card(
-        elevation: 19,
+        elevation: 4, 
         shadowColor: Colors.black12,
         color: const Color.fromARGB(255, 255, 249, 249),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -159,7 +141,7 @@ final con = Get.find<HomeScreenCategoryController>();
                         borderRadius: BorderRadius.circular(12),
                         child: Image.network(
                           imageUrl,
-                          fit: BoxFit.contain, 
+                          fit: BoxFit.cover, 
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return const Center(child: CircularProgressIndicator());
@@ -172,11 +154,11 @@ final con = Get.find<HomeScreenCategoryController>();
                       )
                     : const Icon(Icons.image, size: 40, color: Colors.grey),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               Expanded(
                 child: Text(
-                  product.courseDescription ?? "No Description",
-                  style: GoogleFonts.kantumruyPro(fontSize: 14, fontWeight: FontWeight.bold),
+                  product.courseDescription ?? "គ្មានការពិពណ៌នា",
+                  style: GoogleFonts.kantumruyPro(fontSize: 13, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -189,7 +171,7 @@ final con = Get.find<HomeScreenCategoryController>();
     );
   }
 }
-// ប្តូរពី StatefulWidget មកជា StatelessWidget វិញដើម្បីកាត់បន្ថយទម្ងន់កូដ
+
 class _FilterChipsRow extends StatelessWidget {
   final ViewAllCourseController controller;
   const _FilterChipsRow({required this.controller});
@@ -199,14 +181,15 @@ class _FilterChipsRow extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        // ទាញយក list filterChips ពី controller មកប្រើ
         children: List.generate(controller.filterChips.length, (index) {
           return Obx(() {
-            // ប្រើ Obx ដើម្បីស្តាប់ការផ្លាស់ប្តូរ selectedFilterIndex
             final isSelected = controller.selectedFilterIndex.value == index;
-            
+
             return GestureDetector(
-              onTap: () => controller.changeFilterIndex(index),
+              onTap: () {
+                controller.changeFilterIndex(index);
+                controller.fetchcourse(); 
+              },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 margin: const EdgeInsets.only(right: 10),
@@ -228,7 +211,7 @@ class _FilterChipsRow extends StatelessWidget {
                       : [],
                 ),
                 child: Text(
-                  controller.filterChips[index],
+                  controller.filterChips[index]['name'].toString(),
                   style: GoogleFonts.kantumruyPro(
                     color: isSelected ? Colors.white : Colors.grey.shade600,
                     fontSize: 13,
