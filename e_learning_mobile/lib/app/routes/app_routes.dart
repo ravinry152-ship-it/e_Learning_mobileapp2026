@@ -16,6 +16,7 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const NOTIFICATION = _Paths.NOTIFICATION;
   static const VIEW_BOOK = _Paths.VIEW_BOOK;
+  static const TEST_QUESTION_INCOURSE = _Paths.TEST_QUESTION_INCOURSE;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const NOTIFICATION = '/notification';
   static const VIEW_BOOK = '/view-book';
+  static const TEST_QUESTION_INCOURSE = '/test-question-incourse';
 }

@@ -38,7 +38,7 @@ class ViewCourseDetailView extends GetView<ViewCourseDetailController> {
                 onPressed: () => Get.back(),
               ),
               title: Text(
-                'Course Video',
+                'វីដេអូមេរៀន',
                 style: GoogleFonts.kantumruyPro(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
               ),
               centerTitle: true,
@@ -46,10 +46,10 @@ class ViewCourseDetailView extends GetView<ViewCourseDetailController> {
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ១. ផ្នែកចាក់វីដេអូ YouTube
+                //  ផ្នែកចាក់វីដេអូ YouTube
                 player,
 
-                // ២. ផ្នែកព័ត៌មានខាងក្រោម (Tabs)
+                //  ផ្នែកព័ត៌មានខាងក្រោម (Tabs)
                 Expanded(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(20.0),
@@ -63,59 +63,61 @@ class ViewCourseDetailView extends GetView<ViewCourseDetailController> {
                         const SizedBox(height: 15),
 
                         // Buttons Tab (Playlist / Description)
-                        Row(
-                          children: [
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () => controller.changeTab(0),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                  decoration: BoxDecoration(
-                                    color: controller.currentTab.value == 0 ? const Color(0xFF5C2D91) : Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "Playlist",
-                                      style: GoogleFonts.kantumruyPro(
-                                        color: controller.currentTab.value == 0 ? Colors.white : Colors.grey,
-                                        fontWeight: FontWeight.bold,
+                        Obx(()=>
+                           Row(
+                            children: [
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () => controller.changeTab(0),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                    decoration: BoxDecoration(
+                                      color: controller.currentTab.value == 0 ? const Color(0xFF5C2D91) : Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Playlist",
+                                        style: GoogleFonts.kantumruyPro(
+                                          color: controller.currentTab.value == 0 ? Colors.white : Colors.grey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 15),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () => controller.changeTab(1),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                  decoration: BoxDecoration(
-                                    color: controller.currentTab.value == 1 ? const Color(0xFF5C2D91) : Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "Description",
-                                      style: GoogleFonts.kantumruyPro(
-                                        color: controller.currentTab.value == 1 ? Colors.white : Colors.grey,
-                                        fontWeight: FontWeight.bold,
+                              const SizedBox(width: 15),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () => controller.changeTab(1),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                    decoration: BoxDecoration(
+                                      color: controller.currentTab.value == 1 ? const Color(0xFF5C2D91) : Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Question test",
+                                        style: GoogleFonts.kantumruyPro(
+                                          color: controller.currentTab.value == 1 ? Colors.white : Colors.grey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 20),
 
                         // ប្តូរការបង្ហាញតាម Tab
-                        controller.currentTab.value == 0
+                        Obx(() => controller.currentTab.value == 0
                             ? _buildPlaylistSection()
-                            : _buildDescriptionSection(),
+                            : _buildQuestionTestSection()),
                       ],
                     ),
                   ),
@@ -188,10 +190,74 @@ class ViewCourseDetailView extends GetView<ViewCourseDetailController> {
     );
   }
 
-  Widget _buildDescriptionSection() {
-    return Text(
-      controller.courseDescription.value,
-      style: GoogleFonts.kantumruyPro(fontSize: 14, color: Colors.grey.shade700, height: 1.6),
+ Widget _buildQuestionTestSection() {
+    final List<String> quizList = [
+      "មេរៀនទី១", "មេរៀនទី២", "មេរៀនទី៣",
+      "មេរៀនទី4", "មេរៀនទី5", "មេរៀនទី6"
+      ];
+
+    return GridView.builder(
+      shrinkWrap: true, // ឱ្យទំហំ Grid រួញទៅតាមចំនួន Item កុំឱ្យគាំង Scroll
+      physics: const NeverScrollableScrollPhysics(), 
+      itemCount: quizList.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3, 
+        crossAxisSpacing: 15, 
+        mainAxisSpacing: 20,  
+        childAspectRatio: 0.80, 
+      ),
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: (){
+            Get.toNamed('/test-question-incourse');
+          },
+          child: Card(
+            elevation: 2,
+            margin: EdgeInsets.zero, 
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              onTap: () {
+                 Get.toNamed('/test-question-incourse');
+              },
+              child: Container(
+                color: Colors.amber.withOpacity(0.15), 
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                   
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                        color: Colors.amber, 
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.assignment, 
+                        color: Colors.black87,
+                        size: 20,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    
+                    // អក្សរបង្ហាញឈ្មោះ 
+                    Text(
+                      quizList[index],
+                      style: GoogleFonts.kantumruyPro(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

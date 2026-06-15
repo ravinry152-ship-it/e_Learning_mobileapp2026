@@ -12,6 +12,8 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+import '../modules/test_question_incourse/bindings/test_question_incourse_binding.dart';
+import '../modules/test_question_incourse/views/test_question_incourse_view.dart';
 import '../modules/view_all_course/bindings/view_all_course_binding.dart';
 import '../modules/view_all_course/views/view_all_course_view.dart';
 import '../modules/view_book/bindings/view_book_binding.dart';
@@ -77,6 +79,11 @@ class AppPages {
       name: _Paths.VIEW_BOOK,
       page: () => const ViewBookView(),
       binding: ViewBookBinding(),
+    ),
+    GetPage(
+      name: _Paths.TEST_QUESTION_INCOURSE,
+      page: () => const TestQuestionIncourseView(),
+      binding: TestQuestionIncourseBinding(),
     ),
   ];
 }

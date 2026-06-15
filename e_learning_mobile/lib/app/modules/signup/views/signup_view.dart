@@ -165,6 +165,34 @@ class SignupView extends GetView<SignupController> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 10,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: (){}, 
+                          icon:Image.network("https://thumbs.dreamstime.com/b/google-logo-white-background-vector-format-available-google-logo-124289805.jpg",
+                          width: 40,height: 40,
+                          ), 
+                          ),
+                          SizedBox(width: 20,),
+                        IconButton(onPressed: (){},
+                         icon: Image.network(
+                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfZsqqAo37fhXpD_T3PuvAz79uQ9o_hlOpcQ&s",
+                          width: 40,
+                          height: 40,
+                         )
+                         ) ,
+                         SizedBox(width: 20,),
+                         IconButton(onPressed: (){},
+                          icon:Image.network(
+                            "https://static.vecteezy.com/system/resources/previews/016/833/872/non_2x/github-logo-git-hub-icon-on-white-background-free-vector.jpg",
+                            width: 40,
+                            height: 40,
+                          )
+                          ) 
+                      ],
+                    )
                   ],
                 ),
               ),
