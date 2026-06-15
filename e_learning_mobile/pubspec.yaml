@@ -47,6 +47,7 @@ dependencies:
   shared_preferences: ^2.5.5
   flutter_pdfview: ^1.4.4
   path_provider: ^2.1.5
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -101,3 +102,15 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/image/logo.jpg" 
+  min_sdk_android: 21
+
+# កូដកំណត់កញ្ចប់ Splash Screen ត្រូវនៅជាប់បន្ទាត់ខាងឆ្វេងបង្អស់បែបនេះ
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/image/logo.jpg
+  android_12:
+    image: assets/image/screen.png

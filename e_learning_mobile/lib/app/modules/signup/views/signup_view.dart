@@ -40,9 +40,9 @@ class SignupView extends GetView<SignupController> {
                     const SizedBox(height: 20),
 
                      Text(
-                      "សូមស្វាគមន៏មកកាន់កម្មវិធីរៀនចំណេះថ្មីៗ",
+                      "សូមស្វាគមន៏មកកាន់កម្មវិធីសាលាខ្មែរ(Sala KH)",
                       style:GoogleFonts.kantumruyPro(
-                        fontSize: 20,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
