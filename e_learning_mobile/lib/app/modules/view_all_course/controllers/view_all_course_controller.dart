@@ -14,7 +14,7 @@ class ViewAllCourseController extends GetxController {
     {'name' : 'ទាំងអស់', 'id': null},
     {'name' : 'បច្ចេកវិទ្យា', 'id':1 },
     {'name' : 'កសិកម្ម', 'id':2 },
-    {'name' : 'ជំនាញបច្ចេកទេស', 'id': 3},
+    {'name' : 'ភាសាបរទេស', 'id': 3},
     {'name' : 'ចំណេះដឹងទូទៅ', 'id':4 },
     ];
   final c= Get.find<HomeScreenCategoryController>();
@@ -56,7 +56,7 @@ class ViewAllCourseController extends GetxController {
         }
       }
     }else{
-      response = await api.get('/courses/$selectedId/');
+      response = await api.get('/courses/?maincourse_id=$selectedId',);
       if(response.statusCode ==200 && response.data != null){
         // បំប្លែងទៅជា BookModel (ថ្នាក់ Category) រួចទាញយកអារេ 'course' មកប្រើ
           final Data categoryData = Data.fromJson(response.data);

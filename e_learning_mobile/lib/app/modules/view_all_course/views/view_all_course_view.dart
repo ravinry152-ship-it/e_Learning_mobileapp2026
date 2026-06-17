@@ -12,7 +12,7 @@ class ViewAllCourseView extends GetView<ViewAllCourseController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F8F8),
+      backgroundColor: const Color.fromARGB(255, 227, 224, 224),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 102, 129, 175),
         elevation: 0,
@@ -85,8 +85,8 @@ class ViewAllCourseView extends GetView<ViewAllCourseController> {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 0.85, 
+          crossAxisSpacing: 7,
+          childAspectRatio: 0.96, 
         ),
         itemCount: c.course.length,
         itemBuilder: (context, index) {

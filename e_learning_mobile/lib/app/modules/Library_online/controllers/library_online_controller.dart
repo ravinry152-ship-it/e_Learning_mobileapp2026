@@ -12,8 +12,9 @@ class LibraryOnlineController extends GetxController {
   final List<Map<String, dynamic>> filterChips = [
     {'name': 'ទាំងអស់', 'id': null},       
     {'name': 'បច្ចេកវិទ្យា', 'id': 1},    
-    {'name': 'កសិកម្ម', 'id': 2},       
-    {'name': 'ចំណេះដឹងទូទៅ', 'id': 4},   
+    {'name': 'កសិកម្ម', 'id': 2}, 
+    {'name': 'ភាសាបរទេស', 'id':4},     
+    {'name': 'ចំណេះដឹងទូទៅ', 'id': 5},   
   ];
 
   final RxInt selectedFilterIndex = 0.obs;

@@ -193,7 +193,7 @@ class HomeScreenCategoryView extends GetView<HomeScreenCategoryController> {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
+          crossAxisSpacing: 5,
           childAspectRatio: 0.90, 
         ),
         itemCount: courseList.length >8 ?8 : courseList.length, 
