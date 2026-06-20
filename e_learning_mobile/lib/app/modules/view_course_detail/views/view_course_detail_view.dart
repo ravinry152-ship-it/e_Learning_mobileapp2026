@@ -1,5 +1,4 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -176,7 +175,11 @@ class ViewCourseDetailView extends GetView<ViewCourseDetailController> {
                 ),
                 subtitle: Text(
                   video.duration ?? "00:00", 
-                  style: GoogleFonts.kantumruyPro(color: Colors.grey, fontSize: 12)
+                  style: GoogleFonts.kantumruyPro(
+                    color: Colors.grey, 
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold
+                    )
                 ),
                 trailing: isCurrentPlaying 
                     ? const Icon(Icons.equalizer, color: Color(0xFF5C2D91)) 
@@ -191,73 +194,110 @@ class ViewCourseDetailView extends GetView<ViewCourseDetailController> {
   }
 
  Widget _buildQuestionTestSection() {
-    final List<String> quizList = [
-      "មេរៀនទី១", "មេរៀនទី២", "មេរៀនទី៣",
-      "មេរៀនទី4", "មេរៀនទី5", "មេរៀនទី6"
-      ];
+    //  ១ទាញយកបញ្ជីមេរៀន/វីដេអូពិតប្រាកដចេញពី Controller ដែលបានមកពី API
+    final lessons = controller.courselist; 
+    // ករណីវគ្គសិក្សានោះមិនទាន់មានមេរៀន ឬមិនទាន់មានកម្រងតេស្ត
+    if (lessons.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Text(
+            "មិនទាន់មានកម្រងតេស្តសម្រាប់វគ្គសិក្សានេះទេ",
+            style: GoogleFonts.kantumruyPro(color: Colors.grey),
+          ),
+        ),
+      );
+    }
 
-    return GridView.builder(
-      shrinkWrap: true, // ឱ្យទំហំ Grid រួញទៅតាមចំនួន Item កុំឱ្យគាំង Scroll
-      physics: const NeverScrollableScrollPhysics(), 
-      itemCount: quizList.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, 
-        crossAxisSpacing: 15, 
-        mainAxisSpacing: 20,  
-        childAspectRatio: 0.80, 
+   return ListView.builder(
+  shrinkWrap: true,
+  physics: const NeverScrollableScrollPhysics(),
+  itemCount: lessons.length,
+  itemBuilder: (context, index) {
+  final lesson = lessons[index];
+   return Container(
+      margin: const EdgeInsets.only(bottom: 12), 
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: (){
-            Get.toNamed('/test-question-incourse');
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(14),
+          onTap: () {
+            final int actualLessonId = lesson.id ?? 0;
+            Get.toNamed(
+              '/test-question-incourse',
+              arguments: {'lesson_id': actualLessonId},
+            );
           },
-          child: Card(
-            elevation: 2,
-            margin: EdgeInsets.zero, 
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-              onTap: () {
-                 Get.toNamed('/test-question-incourse');
-              },
-              child: Container(
-                color: Colors.amber.withOpacity(0.15), 
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                   
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        color: Colors.amber, 
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.assignment, 
-                        color: Colors.black87,
-                        size: 20,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    
-                    // អក្សរបង្ហាញឈ្មោះ 
-                    Text(
-                      quizList[index],
-                      style: GoogleFonts.kantumruyPro(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
-                    ),
-                  ],
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                // Icon Wrapper
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.withOpacity(0.15),
+                    shape: BoxShape.circle,
+                  ),
+                  child:  Icon(
+                    Icons.assignment_rounded,
+                    color: Colors.amber,
+                    size: 22,
+                  ),
                 ),
-              ),
+                const SizedBox(width: 16),
+                // Text Details
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "មេរៀនទី ${index + 1}",
+                        style: GoogleFonts.kantumruyPro(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromARGB(255, 38, 35, 35),
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        lesson.title ?? "ចំណងជើងមេរៀន",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.kantumruyPro(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // Action Arrow
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                  color: Colors.grey[400],
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
-  }
+  },
+);
+}
 }
