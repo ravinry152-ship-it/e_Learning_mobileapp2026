@@ -95,7 +95,7 @@ class TestQuestionIncourseController extends GetxController {
         '/submite/', 
         data: requestData, 
       );
-      if (response.statusCode == 200 && response.data != null) {
+      if (response.statusCode == 200 || response.statusCode == 201 && response.data != null) {
         Get.offNamed('/quiz-result', arguments: response.data);
       } else {
         Get.snackbar('បញ្ជាក់', 'ការផ្ញើចម្លើយមិនជោគជ័យឡើយ');

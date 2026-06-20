@@ -10,6 +10,8 @@ import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/quiz-result/bindings/quiz_result_binding.dart';
+import '../modules/quiz-result/views/quiz_result_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/test_question_incourse/bindings/test_question_incourse_binding.dart';
@@ -84,6 +86,11 @@ class AppPages {
       name: _Paths.TEST_QUESTION_INCOURSE,
       page: () => const TestQuestionIncourseView(),
       binding: TestQuestionIncourseBinding(),
+    ),
+    GetPage(
+      name: _Paths.QUIZ_RESULT,
+      page: () => const QuizResultView(),
+      binding: QuizResultBinding(),
     ),
   ];
 }

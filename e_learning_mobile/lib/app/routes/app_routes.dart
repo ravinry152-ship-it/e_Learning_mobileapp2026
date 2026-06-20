@@ -17,6 +17,7 @@ abstract class Routes {
   static const NOTIFICATION = _Paths.NOTIFICATION;
   static const VIEW_BOOK = _Paths.VIEW_BOOK;
   static const TEST_QUESTION_INCOURSE = _Paths.TEST_QUESTION_INCOURSE;
+  static const QUIZ_RESULT = _Paths.QUIZ_RESULT;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const NOTIFICATION = '/notification';
   static const VIEW_BOOK = '/view-book';
   static const TEST_QUESTION_INCOURSE = '/test-question-incourse';
+  static const QUIZ_RESULT = '/quiz-result';
 }
