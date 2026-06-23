@@ -1,12 +1,14 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:e_learning_mobile/app/modules/model/course_model.dart';
+import 'package:e_learning_mobile/app/modules/notification/controllers/notification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/home_screen_category_controller.dart';
 
 class HomeScreenCategoryView extends GetView<HomeScreenCategoryController> {
-  const HomeScreenCategoryView({super.key});
+   HomeScreenCategoryView({super.key});
+  final NotificationController n = Get.put(NotificationController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,16 +48,58 @@ class HomeScreenCategoryView extends GetView<HomeScreenCategoryController> {
                                         color: Color.fromARGB(255, 201, 192, 192), 
                                       ),
                                     ),
-                                    IconButton(
-                                      onPressed: () {
-                                        Get.toNamed('/notification');
-                                      }, 
-                                      icon: const Icon(
-                                        Icons.notifications,
-                                        color: Colors.white,
-                                        size: 25,
-                                      ),
-                                    ),
+                                    Obx((){
+                                      final unreadCount = n.unreadNotificationsCount.value;
+                                      return Stack(
+                                        clipBehavior: Clip.none,
+                                        children: [
+                                          IconButton(
+                                            onPressed: (){
+                                              n.clearNotificationBadge();
+                                             Get.toNamed('/notification');
+
+                                            }, 
+                                          icon: Icon(
+                                            Icons.notifications,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                          ),
+                                          if(unreadCount >0)
+                                          Positioned(
+                                            top: 4,
+                                            right: 4,
+                                            child:Container(
+                                              padding: EdgeInsets.all(4),
+                                              constraints: BoxConstraints(
+                                                maxWidth: 18,
+                                                minHeight: 18,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 1,
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  '$unreadCount',
+                                                  style: GoogleFonts.kantumruyPro(
+                                                    color: Colors.white,
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.bold
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            )
+                                             )
+                                        ],
+                                      );
+                                    })
+                                    
                                   ],
                                 ),
                               ),

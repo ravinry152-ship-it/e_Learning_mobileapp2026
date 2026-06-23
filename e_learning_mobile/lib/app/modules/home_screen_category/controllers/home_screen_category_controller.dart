@@ -97,4 +97,5 @@ class HomeScreenCategoryController extends GetxController {
       }
     }
   }
+  
 }

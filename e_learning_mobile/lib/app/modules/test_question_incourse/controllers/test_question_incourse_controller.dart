@@ -64,6 +64,20 @@ class TestQuestionIncourseController extends GetxController {
       submitQuiz();
     }
   }
+  // ===========================skipQuestion====================================
+  void skipQuestion(){
+    if (questions.isEmpty) return;
+
+    int currentQuestionId = questions[currentQuestionIndex.value]['id'];
+    
+    
+    if (!studentAnswers.containsKey(currentQuestionId)) {
+      studentAnswers[currentQuestionId] = 0; 
+    }
+
+    // ប្តូរទៅសំណួរបន្ទាប់
+    nextQuestion();
+  }
 
   // ==============================================================================
   // ៤. មុខងារផ្ញើចម្លើយទៅគណនាពិន្ទុនៅលើ Backend (Submit)

@@ -40,7 +40,7 @@ class TestQuestionIncourseView extends GetView<TestQuestionIncourseController> {
         centerTitle: true,
         actions: [
           TextButton(
-            onPressed: () => controller.nextQuestion(),
+            onPressed: () => controller.skipQuestion(),
             child: Text(
               "រំលង",
               style: GoogleFonts.kantumruyPro(
